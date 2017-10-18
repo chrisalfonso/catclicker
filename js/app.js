@@ -1,36 +1,28 @@
+// ViewModel: connects and separates View from Model.
+var ViewModel = function() {
+	// Ah, the model (stuff below) is in the ViewModel. 
+	// There's a better way, but not 'til later.
+	this.clickCount = ko.observable(0);
+	this.name = ko.observable('Tabby');
+	//this.catLevel = ko.observable('Newborn')
+	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
+	this.imgAttribution = ko.observable('https://www.flickr.com');
 
-var cats = $(".cat");
-var buttons = $("button");
+	// Probably need to look up this method.
+	this.incrementCounter = function() {
+		this.clickCount(this.clickCount() + 1);
+		if (clickCount < 5) {
+			this.catLevel = ko.observable('Newborn')
+		}
+	};
 
-function hideAllCats(){
-	for (var i=0; i<cats.length; i++){
-		$(cats[i]).hide();
-	}
+	/* Cat Levels
+	this.catLevel = ko.computed(function() {
+		return "Kittens: " + this.incrementCounter();
+	}, this);
+	*/
+
 }
 
-function bindButtonToCat(idNumber){
-	$("#button"+idNumber).click(function(){
-		hideAllCats();
-		$("#cat"+idNumber).show();
-	})
-}
-
-function bindCounterToCat(idNumber){
-	var cat = "#cat"+idNumber
-	$(cat).click(function(){
-		var count = $(cat+" > .counter").text();
-		count = parseInt(count) + 1;
-		$(cat+" > .counter").text(count);
-	})
-}
-
-for (var i=1; i<=buttons.length; i++){
-	bindButtonToCat(i);
-}
-
-for (var i=1; i<=cats.length; i++){
-	bindCounterToCat(i);
-}
-
-hideAllCats();
-$("#cat1").show();
+// Required
+ko.applyBindings(new ViewModel());
