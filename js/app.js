@@ -4,6 +4,8 @@ var ViewModel = function() {
 	// There's a better way, but not 'til later.
 	this.clickCount = ko.observable(0);
 	this.name = ko.observable('Tabby');
+	this.nickNames = ko.observableArray([
+	"TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
 	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
 	this.imgAttribution = ko.observable('https://www.flickr.com');
 
@@ -27,21 +29,15 @@ var ViewModel = function() {
 				return "Most Honorable Cat";
 				break;
 			case this.clickCount() > 50:
-				return "Immortal Cat";
+				return "Lord/Lordess of the Cats";
 				break;
 			case this.clickCount() > 100:
-				return "Lord/Lordess of the Cats"
+				return "Immortal Cat"
 		}
 		
 	}, this);
-
 	
 }
-
-/*if (this.clickCount() <= 5) {
-			return "Newborn";
-		}
-		*/
 
 // Required
 ko.applyBindings(new ViewModel());
