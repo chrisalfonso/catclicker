@@ -1,17 +1,10 @@
-// ViewModel: connects and separates View from Model.
-var ViewModel = function() {
-	// Ah, the model (stuff below) is in the ViewModel. 
-	// There's a better way, but not 'til later.
+// Model
+var Cat = function() {
 	this.clickCount = ko.observable(0);
 	this.name = ko.observable('Tabby');
-	this.nickNames = ko.observableArray([
-	"TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
+	this.nickNames = ko.observableArray(["TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
 	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
 	this.imgAttribution = ko.observable('https://www.flickr.com');
-
-	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1);
-	};
 
 	// Cat Levels
 	this.catLevel = ko.computed(function() {
@@ -36,6 +29,15 @@ var ViewModel = function() {
 		}
 		
 	}, this);
+}
+
+// ViewModel: connects and separates View from Model.
+var ViewModel = function() {
+	this.currentCat = ko.observable(new Cat());
+
+	this.incrementCounter = function() {
+		this.currentCat().clickCount(this.currentCat().clickCount() + 1);
+	};
 	
 }
 
