@@ -36,9 +36,15 @@ var ViewModel = function() {
 	this.currentCat = ko.observable(new Cat());
 
 	this.incrementCounter = function() {
-		this.currentCat().clickCount(this.currentCat().clickCount() + 1);
+		this.clickCount(this.clickCount() + 1);
 	};
-	
+
+	/*
+		Using "with" in the view changes the binding context
+		so that currentCat is the scope. Previously, 
+		this.currentCat().clickCount() was needed, but using "with"
+		eliminates the need for the currentCat().
+	*/
 }
 
 // Required
