@@ -1,10 +1,20 @@
 // Model
-var Cat = function() {
-	this.clickCount = ko.observable(0);
-	this.name = ko.observable('Tabby');
-	this.nickNames = ko.observableArray(["TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
-	this.imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
-	this.imgAttribution = ko.observable('https://www.flickr.com');
+var initialCats [
+	{
+		clickCount: 0,
+		name: 'Tabby',
+		nickNames: ,
+		imgSrc: ,
+		imgAttribution ,
+	}
+]
+
+var Cat = function(data) {
+	this.clickCount = ko.observable(data.clickCount);
+	this.name = ko.observable(data.name);
+	this.nickNames = ko.observableArray(data.nickNames);
+	this.imgSrc = ko.observable(data.imgSrc);
+	this.imgAttribution = ko.observable(data.imgAttribution);
 
 	// Cat Levels
 	this.catLevel = ko.computed(function() {
@@ -33,7 +43,13 @@ var Cat = function() {
 
 // ViewModel: connects and separates View from Model.
 var ViewModel = function() {
-	this.currentCat = ko.observable(new Cat());
+	this.currentCat = ko.observable(new Cat({
+		clickCount: 0,
+		name: 'Tabby'
+		nickNames = ko.observableArray(["TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
+		imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
+		imgAttribution = ko.observable('https://www.flickr.com'); 
+	}) );
 
 	this.incrementCounter = function() {
 		this.clickCount(this.clickCount() + 1);
