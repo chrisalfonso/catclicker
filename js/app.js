@@ -1,13 +1,41 @@
 // Model
-var initialCats [
+var initialCats = [
 	{
 		clickCount: 0,
 		name: 'Tabby',
-		nickNames: ,
-		imgSrc: ,
-		imgAttribution ,
+		nickNames: ['TabTab', 'T-Bone', 'Mr.T', 'Tabster McTabish'],
+		imgSrc: 'img/434164568_fea0ad4013_z.jpg',
+		imgAttribution: 'https://flickr.com',
+	},
+	{
+		clickCount: 0,
+		name: 'Tiger',
+		nickNames: ['Tigger', 'Tigs', 'Ol Tigs McDigs'],
+		imgSrc: 'img/22252709_010df3379e_z.jpg',
+		imgAttribution: 'https://flickr.com',
+	},
+	{
+		clickCount: 0,
+		name: 'Scaredy',
+		nickNames: ['Casper', 'Frighty Fright'],
+		imgSrc: 'img/1413379559_412a540d29_z.jpg',
+		imgAttribution: 'https://flickr.com' ,
+	},
+	{
+		clickCount: 0,
+		name: 'Shadow',
+		nickNames: ['Darkness', 'D Payne'],
+		imgSrc: 'img/4154543904_6e2428c421_z.jpg',
+		imgAttribution: 'https://flickr.com',
+	},
+	{
+		clickCount: 0,
+		name: 'Gorm',
+		nickNames: ['El Maxo', 'FecesFace', 'THE Gorm'],
+		imgSrc: 'img/9648464288_2516b35537_z.jpg',
+		imgAttribution: 'https://flickr.com',
 	}
-]
+];
 
 var Cat = function(data) {
 	this.clickCount = ko.observable(data.clickCount);
@@ -43,17 +71,31 @@ var Cat = function(data) {
 
 // ViewModel: connects and separates View from Model.
 var ViewModel = function() {
-	this.currentCat = ko.observable(new Cat({
-		clickCount: 0,
-		name: 'Tabby'
-		nickNames = ko.observableArray(["TabTab", "T-Bone", "Mr.T", "Tabster McTabish"]);
-		imgSrc = ko.observable('img/434164568_fea0ad4013_z.jpg');
-		imgAttribution = ko.observable('https://www.flickr.com'); 
-	}) );
+	var self = this;
 
+	// keep all the kitties here
+	this.catList = ko.observableArray([]);
+
+	// make a cat object for each item in the data array (up top)
+	initialCats.forEach(function(catItem) {
+		self.catList.push(new Cat(catItem));
+	});
+
+	// get the currently selected cat
+	this.currentCat = ko.observable(this.catList()[0]);
+
+	// track how many times cat image has been clicked
 	this.incrementCounter = function() {
 		this.clickCount(this.clickCount() + 1);
 	};
+
+	// change currentCat
+	this.changeCat = function() {
+		// what is the index of the cat was clicked?
+		// pass that index to the ko.observable for this.currentCat
+		this.currentCat = ko.observable(this.catList()[1]);
+	};
+
 
 	/*
 		Using "with" in the view changes the binding context
