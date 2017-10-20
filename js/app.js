@@ -37,6 +37,7 @@ var initialCats = [
 	}
 ];
 
+// Class constructor
 var Cat = function(data) {
 	this.clickCount = ko.observable(data.clickCount);
 	this.name = ko.observable(data.name);
@@ -90,10 +91,12 @@ var ViewModel = function() {
 	};
 
 	// change currentCat
-	this.changeCat = function() {
+	this.changeCat = function(clickedCat) {
 		// what is the index of the cat was clicked?
 		// pass that index to the ko.observable for this.currentCat
-		this.currentCat = ko.observable(this.catList()[1]);
+		// knockout js docs indicates that item that is clicked is passed in to function
+		self.currentCat(clickedCat);
+		//console.log('HI');
 	};
 
 
